@@ -1,0 +1,38 @@
+.submit {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #9c62da, #c2185b);
+    border-radius: 40px;
+    background-size: 100% auto;
+    padding: 0.6em 1.5em;
+}
+
+.submit:hover {
+background-position: right center;
+background-size: 200% auto;
+-webkit-animation: pulse 2s infinite;
+animation: pulse512 1.5s infinite;
+}
+
+.submit:active {
+    color: #e4b0ff;
+}
+
+.submit:disabled {
+    background-image: linear-gradient(30deg, #815baa, #952d57);
+    color: #d1d1d1;
+}
+
+@keyframes pulse512 {
+    0% {
+        box-shadow: 0 0 0 0 #da05d666;
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
+}

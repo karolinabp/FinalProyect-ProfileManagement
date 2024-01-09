@@ -1,0 +1,44 @@
+.btn {
+    text-decoration: none;
+    color: #c2185b;
+    background-color: #f9f9f9;
+    padding: 14px 40px;
+    border-radius: 0px;
+    transition: .4s;
+    width: 40%;
+    font-size: 1.2rem;
+   }
+   
+   .btn:hover {
+    transition: .4s;
+    background-color: #ffeffa;
+   }
+   
+   .btn:active {
+    background-color: #e2cddf;
+    color:#c2185b;
+    border: 0px;
+   }
+   .btn:focus {
+    transition: .4s;
+    border: 0px;
+    border-bottom: 2px solid #c2185b;
+   }
+   
+   
+img {
+    padding-right: 1rem;
+    width: 20%;
+}
+
+.title {
+    text-align: center;
+    color: white;
+    font-size: 1.4rem;
+    background-color: #c2185b;
+    width: 100%;
+    height: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+

@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-end mb-3">
+    <button class="add d-flex align-items-center" routerLink="/adduserType" matTooltip="Add user type"> 
+        <mat-icon class="material-icons-sm">library_add</mat-icon>
+    </button>
+</div>
+
+<div class="card-body">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let type of userTypes">
+                <td>{{ type.id }}</td>
+                <td>{{ type.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
