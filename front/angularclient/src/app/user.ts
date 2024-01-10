@@ -3,5 +3,5 @@ export class User {
     name: string = "";
     firstName: string = "";
     email: string = "";
-    userTypeId: string = "1"; 
+    userTypeId: string = ""; 
 }

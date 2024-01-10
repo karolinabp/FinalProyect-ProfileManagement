@@ -20,6 +20,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogClose } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { UserCardComponent } from './user-card/user-card.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { EditUserTypeComponent } from './edit-user-type/edit-user-type.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { UserCardComponent } from './user-card/user-card.component';
     UserFormComponent,
     UsertypeListComponent,
     UsertypeFormComponent,
-    UserCardComponent
+    UserCardComponent,
+    EditUserComponent,
+    EditUserTypeComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +49,8 @@ import { UserCardComponent } from './user-card/user-card.component';
     MatTooltipModule,
     MatButtonModule,
     MatCardModule,
-    MatDialogClose
+    MatDialogClose,
+    MatMenuModule
   ],
   providers: [UserServiceService],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-end mb-3">
-    <button class="add d-flex align-items-center" routerLink="/adduser" matTooltip="Add user"> 
+    <button class="add d-flex align-items-center"  routerLink="/adduser" matTooltip="Add user"> 
         <mat-icon>group_add</mat-icon>
     </button>
 </div>
@@ -8,14 +8,17 @@
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Type</th>
+                <th scope="col" class="d-flex justify-content-start align-items-center">
+                    <mat-icon class="order-icon" (click)="sortUsersByType()" matTooltip="Sort by type">unfold_more</mat-icon>
+                    Type
+                </th>
                 <th scope="col">Name</th>
                 <th scope="col">First name</th>
                 <th scope="col">Email</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let user of sortedUsers">
                 <td>{{ getUserType(user.userTypeId) }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.firstName }}</td>
@@ -24,7 +27,7 @@
                     <button mat-icon-button color="primary" (click)="openUserProfileDialog(user)" matTooltip="User profile">
                         <mat-icon>person</mat-icon>
                     </button>
-                    <button mat-icon-button color="primary" matTooltip="Edit user">
+                    <button mat-icon-button color="primary"  (click)="editUser(user)" matTooltip="Edit user">
                         <mat-icon>edit</mat-icon>
                     </button>
                     <button mat-icon-button color="primary" (click)="deleteUser(user.id)" matTooltip="Delete user">

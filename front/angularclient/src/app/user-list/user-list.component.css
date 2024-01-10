@@ -8,10 +8,10 @@
 }
 
 .add:hover {
-background-position: right center;
-background-size: 200% auto;
--webkit-animation: pulse 2s infinite;
-animation: pulse512 1.5s infinite;
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
 }
 
 .add:active {
@@ -31,12 +31,15 @@ animation: pulse512 1.5s infinite;
         box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
     }
 }
+
 /*Table*/
 
-.table-bordered tbody  {
+.table-bordered tbody {
     border-top: 4px solid #e91e63;
-  }
-.table-bordered th, .table-bordered td {
+}
+
+.table-bordered th,
+.table-bordered td {
     border: none;
 }
 
@@ -45,8 +48,11 @@ animation: pulse512 1.5s infinite;
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
 }
+
 .profile {
     background-color: rgb(169, 128, 128);
     color: black;
 }
-
+.order-icon {
+    font-size: 20px;
+}

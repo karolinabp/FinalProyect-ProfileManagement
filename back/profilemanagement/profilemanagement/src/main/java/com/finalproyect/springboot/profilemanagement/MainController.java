@@ -32,6 +32,27 @@ public class MainController {
         userRepository.deleteById(id);
         return "User deleted successfully";
     }
+
+    @PatchMapping("/users/editUser/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+
+            existingUser.setName(updatedUser.getName());
+            existingUser.setFirstName(updatedUser.getFirstName());
+            existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setUserTypeId(updatedUser.getUserTypeId());
+
+            userRepository.save(existingUser);
+            return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    //I used these methods to prove that each part worked
     @PatchMapping("/users/editName/{id}")
     public ResponseEntity<String> updateUserName(@PathVariable Long id, @RequestBody String newName) {
         Optional<User> optionalUser = userRepository.findById(id);
@@ -84,7 +105,11 @@ public class MainController {
         }
     }
 
+
+
+
     // USER TYPE METHODS
+
     @PostMapping("/userTypes")
     public ResponseEntity<String> addUserType(@RequestBody UserType userType) {
         try {
@@ -99,9 +124,14 @@ public class MainController {
         return (List<UserType>) userTypeRepository.findAll();
     }
     @DeleteMapping("/userTypes/{id}")
-    public String deleteUserType(@PathVariable ("id") Long id){
-        userTypeRepository.deleteById(id);
-        return "User Type deleted successfully";
+    public ResponseEntity<String> deleteUserType(@PathVariable("id") Long id) {
+        try {
+            userTypeRepository.deleteById(id);
+            return ResponseEntity.ok("User Type deleted successfully");
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Cannot delete the User Type. It is being referenced by other records.");
+        }
     }
     @PatchMapping("/userTypes/editTypeName/{id}")
     public ResponseEntity<String> updateUserTypeName(@PathVariable Long id, @RequestBody String newTypeName) {

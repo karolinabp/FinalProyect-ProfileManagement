@@ -6,6 +6,7 @@ import { UsertypeServiceService } from '../../services/usertype-service.service'
 import { MatDialog } from '@angular/material/dialog';
 import { UserCardComponent } from '../user-card/user-card.component';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -14,13 +15,16 @@ import { Router } from '@angular/router';
 })
 export class UserListComponent implements OnInit {
 
-  users: User[] | undefined;
+  users: User[] = [];
   userTypes: Usertype[] | undefined;
+  sortedUsers: any[] = []; 
+  currentSortOrder: string = 'asc';
 
   constructor(private userService: UserServiceService,
     private userTypeService: UsertypeServiceService,
     public dialog: MatDialog, 
     private router: Router) { }
+
 
   openUserProfileDialog(user: User): void {
     const dialogRef = this.dialog.open(UserCardComponent, {
@@ -45,6 +49,7 @@ export class UserListComponent implements OnInit {
         console.log("confrimado borrado "+response);
         this.userService.findAll().subscribe(data => {
           this.users = data;
+          this.sortedUsers = data;
         });
         this.router.navigate(['/users']); 
       },
@@ -54,18 +59,35 @@ export class UserListComponent implements OnInit {
     );
   }
 
+  editUser(user: User): void {
+    this.userService.setUserData(user);
+    console.log("usuario cargado:", user.id, user.name);
+    this.router.navigate(['/editUser']);
+  }
   
-
+  sortUsersByType() {
+    if (this.currentSortOrder === 'asc') {
+      this.sortedUsers = this.users.slice().sort((a, b) => parseInt(a.userTypeId) - parseInt(b.userTypeId));
+      this.currentSortOrder = 'desc';
+      console.log(this.sortedUsers);
+    } else {
+      this.sortedUsers = this.users.slice().sort((a, b) => parseInt(b.userTypeId) - parseInt(a.userTypeId));
+      this.currentSortOrder = 'asc';
+      console.log(this.sortedUsers);
+    }
+  }
 
   ngOnInit() {
 
     this.userService.findAll().subscribe(data => {
       this.users = data;
+      this.sortedUsers = data;
     });
 
     this.userTypeService.findAll().subscribe(data => {
       this.userTypes = data;
     });
+
 
   }
 

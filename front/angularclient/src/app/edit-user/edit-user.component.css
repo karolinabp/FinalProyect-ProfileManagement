@@ -1,5 +1,4 @@
-
-.add {
+.edit {
     border: none;
     color: #fff;
     background-image: linear-gradient(30deg, #9c62da, #c2185b);
@@ -8,15 +7,20 @@
     padding: 0.6em 1.5em;
 }
 
-.add:hover {
+.edit:hover {
 background-position: right center;
 background-size: 200% auto;
 -webkit-animation: pulse 2s infinite;
 animation: pulse512 1.5s infinite;
 }
 
-.add:active {
+.edit:active {
     color: #e4b0ff;
+}
+
+.edit:disabled {
+    background-image: linear-gradient(30deg, #815baa, #952d57);
+    color: #d1d1d1;
 }
 
 @keyframes pulse512 {
@@ -31,17 +35,4 @@ animation: pulse512 1.5s infinite;
     100% {
         box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
     }
-}
-
-/*Table*/
-
-.table-bordered tbody {
-    border-top: 4px solid #e91e63;
-  }
-.table-bordered th, .table-bordered td {
-    border: none;
-}
-
-.order-icon {
-    font-size: 20px;
 }

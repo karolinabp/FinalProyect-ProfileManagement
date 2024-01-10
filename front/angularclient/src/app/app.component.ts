@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Spring Boot - Angular Application';
-  option = '';
+  option = 'Users';
+
+  
 }

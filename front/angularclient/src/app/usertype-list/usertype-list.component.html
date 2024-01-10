@@ -8,14 +8,25 @@
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Id</th>
+                <th scope="col" class="d-flex justify-content-start align-items-center">
+                    <mat-icon class="order-icon" (click)=" sortUserTypes()" matTooltip="Sort types">unfold_more</mat-icon>
+                    Id
+                </th>
                 <th scope="col">Type</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let type of userTypes">
+            <tr *ngFor="let type of sortedUserTypes">
                 <td>{{ type.id }}</td>
                 <td>{{ type.type }}</td>
+                <td class="d-flex justify-content-end m-0 p-0">
+                    <button mat-icon-button color="primary" (click)="editUserType(type)" matTooltip="Edit user type">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="deleteUserType(type.id)"  matTooltip="Delete user type">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>

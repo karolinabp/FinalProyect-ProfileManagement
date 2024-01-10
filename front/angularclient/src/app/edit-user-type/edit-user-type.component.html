@@ -1,17 +1,17 @@
 <div class="card my-5">
     <div  class="card-body">
-        <form (ngSubmit)="OnSubmit()" #userForm="ngForm">
+        <form  #userForm="ngForm">
             <div class="form-group">
                 <label for="type">Type</label>
                 <input type="text" [(ngModel)]="userType.type" 
                 class="form-control" id="type" name="type" 
                 placeholder="Enter a type" required #type="ngModel">
             </div>
-            <div [hidden]="!type.touched || !type.invalid" class="alert alert-danger">Type is required</div>
+            <div [hidden]="!type.invalid" class="alert alert-danger">Type is required</div>
             
             <div class="d-flex justify-content-center mb-3 mt-3">
-                <button class="submit d-flex align-items-center" type="submit" [disabled]="!userForm.form.valid"> 
-                    SUBMIT
+                <button class="edit d-flex align-items-center" type="submit" (click)="updateUserTypeName(userType.id, userType.type)" [disabled]="!userForm.form.valid"> 
+                    Edit user type
                 </button>
             </div>
         </form>
