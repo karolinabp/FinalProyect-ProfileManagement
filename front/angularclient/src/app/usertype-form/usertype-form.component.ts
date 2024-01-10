@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user';
 import { UsertypeServiceService } from '../../services/usertype-service.service';
 import { Message } from 'primeng/api';
-import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-usertype-form',
@@ -19,12 +18,11 @@ export class UsertypeFormComponent {
 
   constructor(private route: ActivatedRoute, 
     private router: Router,
-    private usertypeService: UsertypeServiceService,
-    private sharedService: SharedService){
+    private usertypeService: UsertypeServiceService){
     this.userType = new Usertype;
   }
 
-  
+  /** This method also connect with the usertype service to save a new type*/
   OnSubmit() {
     this.usertypeService.save(this.userType).subscribe(
       result => {

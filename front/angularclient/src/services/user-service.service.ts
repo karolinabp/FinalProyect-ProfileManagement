@@ -12,18 +12,37 @@ export class UserServiceService {
 
   private usersUrl: string = "";
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/users';
   }
 
-  public findAll(): Observable<User[]>{
+  /** I used these two methods to share data between components */
+  /**---------------------------------------------------------- */
+  setUserData(user: User): void {
+    this.userData = user;
+  }
+
+  getUserData(): Observable<User> {
+    return new Observable(observer => {
+      observer.next(this.userData);
+      observer.complete();
+    });
+  }
+  /**---------------------------------------------------------- */
+
+  // GET POST PATCH AND DELETE METHODS for User
+  /**---------------------------------------------------------- */
+  /** GET method */
+  public findAll(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl);
   }
 
+  /** POST method */
   public save(user: User) {
-    return this.http.post<User>(this.usersUrl, user, {responseType: 'text' as 'json'});
+    return this.http.post<User>(this.usersUrl, user, { responseType: 'text' as 'json' });
   }
 
+  /** DELETE method */
   public deleteUser(id: string): Observable<string> {
     const url = `${this.usersUrl}/${id}`;
     return this.http.delete(url, { responseType: 'text' }).pipe(
@@ -31,7 +50,20 @@ export class UserServiceService {
     );
   }
 
-  
+  /** PATCH method */
+  public updateUser(id: string, newUser: User): Observable<string> {
+    const url = `${this.usersUrl}/editUser/${id}`;
+    const requestBody = JSON.stringify(newUser);
+    return this.http.patch(url, requestBody, { headers: { 'Content-Type': 'application/json' }, responseType: 'text' }).pipe(
+      map(response => response as string),
+      catchError(error => throwError(error))
+    );
+  }
+  /**---------------------------------------------------------- */
+
+
+  // The following code is the one I used to test that the connection with the api works propperly
+  /** 
   public updateUserProperty(id: string, property: string, newValue: any): Observable<string> {
 
     console.log("conectando con la api...");
@@ -44,21 +76,6 @@ export class UserServiceService {
       catchError(error => throwError(error))
     );
   }
-
-  public updateUser(id: string, newUser: User): Observable<string> {
-
-    console.log("conectando con la api...");
-    console.log(newUser);
-    const url = `${this.usersUrl}/editUser/${id}`;
-    const requestBody = JSON.stringify(newUser);
-    
-    return this.http.patch(url, requestBody, { headers: { 'Content-Type': 'application/json' }, responseType: 'text' }).pipe(
-      map(response => response as string),
-      catchError(error => throwError(error))
-    );
-    
-  }
-
 
   public updateUserName(id: string, newName: string): Observable<string> {
     return this.updateUserProperty(id, 'Name', newName);
@@ -77,17 +94,6 @@ export class UserServiceService {
     return this.updateUserProperty(id, 'Type', newTypeInt);
   }
 
-
-  setUserData(user: User): void {
-    this.userData = user;
-  }
-
-  getUserData(): Observable<User> {
-    return new Observable(observer => {
-      observer.next(this.userData);
-      observer.complete();
-    });
-  }
-
+  */
 
 }

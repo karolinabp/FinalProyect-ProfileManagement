@@ -3,7 +3,6 @@ import { Usertype } from '../usertype';
 import { UsertypeServiceService } from '../../services/usertype-service.service';
 import { Router } from '@angular/router';
 import { Message } from 'primeng/api';
-import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-usertype-list',
@@ -18,11 +17,10 @@ export class UsertypeListComponent implements OnInit{
   message: Message[] = [];
 
   constructor(private userTypeService: UsertypeServiceService,
-    private sharedService: SharedService,
     private router: Router){
 
   }
-
+  /** method to sort the types */
   sortUserTypes() {
     if (this.currentSortOrder === 'asc') {
       this.sortedUserTypes = this.userTypes.slice().sort((a, b) => parseInt(a.id) - parseInt(b.id));
@@ -35,10 +33,12 @@ export class UsertypeListComponent implements OnInit{
     }
   }
 
+  /** Methods thas use the usertype service to connect with the api, charge the new data and shows messages */
+  /**------------------------------------------------------------------------------------------------------ */
   deleteUserType(id: string): void {
     this.userTypeService.deleteUserType(id).subscribe(
       response => {
-        console.log("confrimado borrado "+response);
+        console.log("deleted successfully"+response);
         this.userTypeService.findAll().subscribe(data => {
           this.userTypes = data;
           this.sortedUserTypes = data;
@@ -48,8 +48,7 @@ export class UsertypeListComponent implements OnInit{
       },
       error => {
         this.message = [{ severity: 'error', summary: 'Error', detail: 'There are users with this type' }];
-        
-        console.error("fallo"); 
+        console.error("fail"); 
       }
     );
   }
@@ -59,6 +58,8 @@ export class UsertypeListComponent implements OnInit{
     console.log("usuario cargado:", userType.id, userType.type);
     this.router.navigate(['/editUserType']);
   }
+  /**------------------------------------------------------------------------------------------------------ */
+
 
   ngOnInit() {
     

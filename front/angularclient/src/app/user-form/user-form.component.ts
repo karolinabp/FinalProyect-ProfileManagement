@@ -4,8 +4,6 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { UserServiceService } from '../../services/user-service.service';
 import { Usertype } from '../usertype';
 import { UsertypeServiceService } from '../../services/usertype-service.service';
-import { Message } from 'primeng/api';
-import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-user-form',
@@ -20,8 +18,7 @@ export class UserFormComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
     private router: Router, 
     private userService: UserServiceService, 
-    private usertypeService: UsertypeServiceService,
-    private sharedService: SharedService){
+    private usertypeService: UsertypeServiceService){
     this.user = new User();
   }
 
