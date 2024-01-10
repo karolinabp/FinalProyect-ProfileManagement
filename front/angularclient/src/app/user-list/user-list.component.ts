@@ -83,6 +83,18 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  sortUsersByName() {
+    if (this.currentSortOrder === 'asc') {
+      this.sortedUsers = this.users.slice().sort((a, b) => a.name.localeCompare(b.name));
+      this.currentSortOrder = 'desc';
+      console.log(this.sortedUsers);
+    } else {
+      this.sortedUsers = this.users.slice().sort((a, b) => b.name.localeCompare(a.name));
+      this.currentSortOrder = 'asc';
+      console.log(this.sortedUsers);
+    }
+  }
+
   ngOnInit() {
     this.userService.findAll().subscribe(data => {
       this.users = data;

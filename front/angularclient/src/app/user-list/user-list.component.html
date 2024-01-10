@@ -8,11 +8,18 @@
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th scope="col" class="d-flex justify-content-start align-items-center">
-                    <mat-icon class="order-icon" (click)="sortUsersByType()" matTooltip="Sort by type">unfold_more</mat-icon>
-                    Type
+                <th scope="col">
+                    <div class="d-flex align-items-center">
+                        <mat-icon class="order-icon" (click)="sortUsersByType()" matTooltip="Sort by type">unfold_more</mat-icon>
+                        Type
+                    </div>
                 </th>
-                <th scope="col">Name</th>
+                <th scope="col">
+                    <div class="d-flex align-items-center">
+                        <mat-icon class="order-icon" (click)="sortUsersByName()" matTooltip="Sort by Name">unfold_more</mat-icon>
+                        Name
+                    </div>
+                </th>
                 <th scope="col">First name</th>
                 <th scope="col">Email</th>
             </tr>
