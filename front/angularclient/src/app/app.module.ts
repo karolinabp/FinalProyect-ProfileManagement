@@ -23,6 +23,8 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUserTypeComponent } from './edit-user-type/edit-user-type.component';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { EditUserTypeComponent } from './edit-user-type/edit-user-type.component
     MatButtonModule,
     MatCardModule,
     MatDialogClose,
-    MatMenuModule
+    MatMenuModule,
+    MessageModule,
+    MessagesModule
   ],
   providers: [UserServiceService],
   bootstrap: [AppComponent]

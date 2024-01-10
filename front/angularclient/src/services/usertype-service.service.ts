@@ -24,6 +24,7 @@ export class UsertypeServiceService {
     return this.http.post<Usertype>(this.userTypesUrl, usertype, {responseType: 'text' as 'json'});
   }
 
+
   public deleteUserType(id: string): Observable<string> {
     const url = `${this.userTypesUrl}/${id}`;
     return this.http.delete(url, { responseType: 'text' }).pipe(

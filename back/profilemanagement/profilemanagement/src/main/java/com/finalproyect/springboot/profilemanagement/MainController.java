@@ -51,7 +51,7 @@ public class MainController {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
     }
-    
+
     //I used these methods to prove that each part worked
     @PatchMapping("/users/editName/{id}")
     public ResponseEntity<String> updateUserName(@PathVariable Long id, @RequestBody String newName) {

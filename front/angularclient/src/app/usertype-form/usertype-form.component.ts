@@ -3,6 +3,8 @@ import { Usertype } from '../usertype';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user';
 import { UsertypeServiceService } from '../../services/usertype-service.service';
+import { Message } from 'primeng/api';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-usertype-form',
@@ -13,15 +15,26 @@ export class UsertypeFormComponent {
 
   userType: Usertype;
 
+  messages: Message[] = [];
+
   constructor(private route: ActivatedRoute, 
     private router: Router,
-    private usertypeService: UsertypeServiceService){
+    private usertypeService: UsertypeServiceService,
+    private sharedService: SharedService){
     this.userType = new Usertype;
   }
 
   
   OnSubmit() {
-    this.usertypeService.save(this.userType).subscribe(result => this.gotoUserTypesList());
+    this.usertypeService.save(this.userType).subscribe(
+      result => {
+        this.gotoUserTypesList();
+      },
+      error => {
+        this.messages = [{ severity: 'error', summary: 'Error', detail: 'This user type name already exists'}];
+        console.error('Error al guardar el usuario:', error);
+      }
+    );
   }
 
   gotoUserTypesList(){

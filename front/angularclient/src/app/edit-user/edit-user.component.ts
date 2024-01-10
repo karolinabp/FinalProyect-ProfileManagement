@@ -4,6 +4,8 @@ import { UserServiceService } from '../../services/user-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usertype } from '../usertype';
 import { UsertypeServiceService } from '../../services/usertype-service.service';
+import { SharedService } from '../../services/shared.service';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,11 +16,13 @@ export class EditUserComponent {
 
   user: User = { id: '', name: '', firstName: '', email: '', userTypeId: '' };
   userTypes: Usertype[] = [];
-
+  message: Message[] = [];
+  
   constructor(private userService: UserServiceService,
     private router: Router,
     private route: ActivatedRoute,
-    private usertypeService: UsertypeServiceService) { }
+    private usertypeService: UsertypeServiceService,
+    private sharedService: SharedService) { }
 
   loadUserTypes() {
     this.usertypeService.findAll().subscribe(data => {
@@ -38,6 +42,7 @@ export class EditUserComponent {
       }
     );
     this.router.navigate(['/users']);
+    
   }
 
   ngOnInit(): void {
